@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   late double Etanol;
   var _Gasolina = MaskedTextController(mask: '0.00');
   var _Etanol = MaskedTextController(mask: '0.00');
+  var  Resultado;
 
 
   double? Calculo;
@@ -121,16 +122,19 @@ class _HomePageState extends State<HomePage> {
                                 setState(() {
                                   Calculo = Etanol / Gasolina;
                                   if (Calculo! > 0.70)
-                                    print("Gasolina");
+                                  {
+                                    Resultado='Gasolina:';
+                                  }
+                                    
                                   else if (Calculo! < 0.70)
-                                    print ("Etanol");
+                                    Resultado ='Etanol:';
                                 }
                                 );
                                 showDialog(
                                   context: context,
                                   builder: (_) => AlertDialog(
 
-                                    title: Text('(Obs) Se o valor for maior que 0.70 compensa Gasolina se for menor compensa Etanol:',
+                                    title: Text('Está melhor:',
                                         style:
                                         TextStyle(
                                             fontFamily: 'Anton',
@@ -138,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                                             fontSize: 20)
                                     ),
                                     content:
-                                    Text( Calculo!.toStringAsFixed(1),
+                                    Text(  Resultado + Calculo!.toStringAsFixed(1),
                                       textAlign: TextAlign.center ,
                                       style:TextStyle(color: Colors.blueAccent,
                                           fontSize: 40),
